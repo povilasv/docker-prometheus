@@ -5,12 +5,12 @@ This project produces [Prometheus](https://prometheus.io) Docker images for
 
 The available tags are:
 
-- `armhf`: for *32-bits ARM* hosts (built on [Travis](https://travis-ci.org/rycus86/docker-prometheus))  
-  [![Layers](https://images.microbadger.com/badges/image/rycus86/prometheus:armhf.svg)](https://microbadger.com/images/rycus86/prometheus:armhf "Get your own image badge on microbadger.com")
+- `armhf`: for *32-bits ARM* hosts (built on [Travis](https://travis-ci.org/povilasv/docker-prometheus))  
+  [![Layers](https://images.microbadger.com/badges/image/povilasv/prometheus:armhf.svg)](https://microbadger.com/images/povilasv/prometheus:armhf "Get your own image badge on microbadger.com")
 - `aarch64`: for *64-bits ARM* hosts (also built on Travis)  
-  [![Layers](https://images.microbadger.com/badges/image/rycus86/prometheus:aarch64.svg)](https://microbadger.com/images/rycus86/prometheus:aarch64 "Get your own image badge on microbadger.com")
-- `latest`: for *x86* hosts (auto-built on [Docker Hub](https://hub.docker.com/r/rycus86/prometheus/)  
-  [![Layers](https://images.microbadger.com/badges/image/rycus86/prometheus.svg)](https://microbadger.com/images/rycus86/prometheus "Get your own image badge on microbadger.com")
+  [![Layers](https://images.microbadger.com/badges/image/povilasv/prometheus:aarch64.svg)](https://microbadger.com/images/povilasv/prometheus:aarch64 "Get your own image badge on microbadger.com")
+- `latest`: for *x86* hosts (auto-built on [Docker Hub](https://hub.docker.com/r/povilasv/prometheus/)  
+  [![Layers](https://images.microbadger.com/badges/image/povilasv/prometheus.svg)](https://microbadger.com/images/povilasv/prometheus "Get your own image badge on microbadger.com")
 
 The images are all based on *Alpine Linux* with the *ARM* images having a
 small *QEMU* binary to be able to build them on *x64* hosts.
@@ -24,7 +24,7 @@ To run it, use:
 
 ```shell
 docker run -p 9090:9090 -v /tmp/prometheus.yml:/etc/prometheus/prometheus.yml \
-       rycus86/prometheus
+       povilasv/prometheus
 ```
 
 This will take your *Prometheus* config from `/tmp/prometheus.yml` and use it

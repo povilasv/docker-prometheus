@@ -25,9 +25,14 @@ jobs:
         - docker run --rm prometheus:$DOCKER_TAG --version
       after_success:
         - |
-          echo ${DOCKER_PASSWORD} | docker login --username "povilasv" --password-stdin
-          docker tag prometheus:$DOCKER_TAG povilasv/prometheus:$DOCKER_TAG
-          docker push povilasv/prometheus:$DOCKER_TAG
+          echo ${DOCKER_PASSWORD} | docker login --username "rycus86" --password-stdin
+          if [ "$TRAVIS_TAG" == "master" ]; then
+              docker tag prometheus:$DOCKER_TAG rycus86/prometheus:$DOCKER_TAG
+              docker push rycus86/prometheus:$DOCKER_TAG
+          elif [ "$TRAVIS_TAG" == "$PROMETHEUS_VERSION" ]; then
+              docker tag prometheus:$DOCKER_TAG rycus86/prometheus:$PROMETHEUS_VERSION-$DOCKER_TAG
+              docker push rycus86/prometheus:$PROMETHEUS_VERSION-$DOCKER_TAG
+          fi
       env:
         - DOCKER_TAG=amd64
         - DOCKER_ARCH=amd64
@@ -48,7 +53,7 @@ jobs:
     - stage: manifest
       script:
         - |
-          if [ "$TRAVIS_BRANCH" == "$PROMETHEUS_VERSION" ]; then
+          if [ "$TRAVIS_TAG" == "$PROMETHEUS_VERSION" ]; then
               sed -i "s#povilasv/prometheus:#povilasv/prometheus:${PROMETHEUS_VERSION}-#" manifest.yml
               sed -i "s#povilasv/prometheus:${PROMETHEUS_VERSION}-latest#povilasv/prometheus:${PROMETHEUS_VERSION}#" manifest.yml
           fi

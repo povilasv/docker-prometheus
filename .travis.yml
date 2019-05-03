@@ -37,13 +37,13 @@ jobs:
       env:
         - DOCKER_TAG=armhf
         - DOCKER_ARCH=armv7
-        - DOCKER_FROM=povilasv/armhf-alpine-qemu
+        - DOCKER_FROM=rycus86/armhf-alpine-qemu
 
     - <<: *deploy-stage
       env:
         - DOCKER_TAG=aarch64
         - DOCKER_ARCH=arm64
-        - DOCKER_FROM=povilasv/arm64v8-alpine-qemu
+        - DOCKER_FROM=rycus86/arm64v8-alpine-qemu
 
     - stage: manifest
       script:

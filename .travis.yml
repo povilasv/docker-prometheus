@@ -25,13 +25,13 @@ jobs:
         - docker run --rm prometheus:$DOCKER_TAG --version
       after_success:
         - |
-          echo ${DOCKER_PASSWORD} | docker login --username "rycus86" --password-stdin
+          echo ${DOCKER_PASSWORD} | docker login --username "povilasv" --password-stdin
           if [ "$TRAVIS_BRANCH" == "master" ]; then
-              docker tag prometheus:$DOCKER_TAG rycus86/prometheus:$DOCKER_TAG
-              docker push rycus86/prometheus:$DOCKER_TAG
+              docker tag prometheus:$DOCKER_TAG povilasv/prometheus:$DOCKER_TAG
+              docker push povilasv/prometheus:$DOCKER_TAG
           elif [ "$TRAVIS_BRANCH" == "$PROMETHEUS_VERSION" ]; then
-              docker tag prometheus:$DOCKER_TAG rycus86/prometheus:$PROMETHEUS_VERSION-$DOCKER_TAG
-              docker push rycus86/prometheus:$PROMETHEUS_VERSION-$DOCKER_TAG
+              docker tag povilasv:$DOCKER_TAG povilasv/prometheus:$PROMETHEUS_VERSION-$DOCKER_TAG
+              docker push povilasv/prometheus:$PROMETHEUS_VERSION-$DOCKER_TAG
           fi
       env:
         - DOCKER_TAG=amd64
@@ -42,26 +42,26 @@ jobs:
       env:
         - DOCKER_TAG=armhf
         - DOCKER_ARCH=armv7
-        - DOCKER_FROM=rycus86/armhf-alpine-qemu
+        - DOCKER_FROM=povilasv/armhf-alpine-qemu
 
     - <<: *deploy-stage
       env:
         - DOCKER_TAG=aarch64
         - DOCKER_ARCH=arm64
-        - DOCKER_FROM=rycus86/arm64v8-alpine-qemu
+        - DOCKER_FROM=povilasv/arm64v8-alpine-qemu
 
     - stage: manifest
       script:
         - |
           if [ "$TRAVIS_BRANCH" == "$PROMETHEUS_VERSION" ]; then
-              sed -i "s#rycus86/prometheus:#rycus86/prometheus:${PROMETHEUS_VERSION}-#" manifest.yml
-              sed -i "s#rycus86/prometheus:${PROMETHEUS_VERSION}-latest#rycus86/prometheus:${PROMETHEUS_VERSION}#" manifest.yml
+              sed -i "s#povilasv/prometheus:#povilasv/prometheus:${PROMETHEUS_VERSION}-#" manifest.yml
+              sed -i "s#povilasv/prometheus:${PROMETHEUS_VERSION}-latest#povilasv/prometheus:${PROMETHEUS_VERSION}#" manifest.yml
           fi
-        - echo ${DOCKER_PASSWORD} | docker login --username "rycus86" --password-stdin
+        - echo ${DOCKER_PASSWORD} | docker login --username "povilasv" --password-stdin
         - curl -fsSL https://github.com/estesp/manifest-tool/releases/download/v0.7.0/manifest-tool-linux-amd64 > ./manifest-tool
         - chmod +x ./manifest-tool
         - ./manifest-tool push from-spec manifest.yml
 
 env:
   global:
-  - PROMETHEUS_VERSION=2.7.1
+  - PROMETHEUS_VERSION=2.9.1

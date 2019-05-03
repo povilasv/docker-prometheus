@@ -1,9 +1,7 @@
 FROM alpine:latest
 
-LABEL maintainer "Viktor Adam <rycus86@gmail.com>"
-
 ARG ARCH=amd64
-ARG VERSION=2.7.1
+ARG VERSION=2.9.2
 
 RUN apk --no-cache add --virtual build-dependencies wget \
     && apk --no-cache add ca-certificates \

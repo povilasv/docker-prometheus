@@ -37,7 +37,7 @@ version: '2'
 services:
 
   prometheus:
-    image: rycus86/prometheus:aarch64
+    image: povilasv/prometheus:latest
     restart: always
     ports:
      - "9090:9090"

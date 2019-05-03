@@ -26,13 +26,8 @@ jobs:
       after_success:
         - |
           echo ${DOCKER_PASSWORD} | docker login --username "povilasv" --password-stdin
-          if [ "$TRAVIS_BRANCH" == "master" ]; then
-              docker tag prometheus:$DOCKER_TAG povilasv/prometheus:$DOCKER_TAG
-              docker push povilasv/prometheus:$DOCKER_TAG
-          elif [ "$TRAVIS_BRANCH" == "$PROMETHEUS_VERSION" ]; then
-              docker tag povilasv:$DOCKER_TAG povilasv/prometheus:$PROMETHEUS_VERSION-$DOCKER_TAG
-              docker push povilasv/prometheus:$PROMETHEUS_VERSION-$DOCKER_TAG
-          fi
+          docker tag prometheus:$DOCKER_TAG povilasv/prometheus:$DOCKER_TAG
+          docker push povilasv/prometheus:$DOCKER_TAG
       env:
         - DOCKER_TAG=amd64
         - DOCKER_ARCH=amd64

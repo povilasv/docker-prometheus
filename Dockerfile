@@ -1,7 +1,7 @@
 FROM alpine:latest
 
 ARG ARCH=amd64
-ARG VERSION=2.9.2
+ARG VERSION=2.10.0
 
 RUN apk --no-cache add --virtual build-dependencies wget \
     && apk --no-cache add ca-certificates \

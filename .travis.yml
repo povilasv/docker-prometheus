@@ -64,4 +64,4 @@ jobs:
 
 env:
   global:
-  - PROMETHEUS_VERSION=2.9.1
+  - PROMETHEUS_VERSION=2.10.0
